@@ -12,17 +12,17 @@ const aliases:alias[] = [
 ]
 
 const getFromNodeVibrant = function(buffer:Buffer,opts:any) : Promise<RMSwatch[]> {
-  return new Promise((re,er)=>{
+  return new Promise((re, er) => {
     const nv = new NodeVibrant(buffer)
 
     // assign the options
     Object.assign(nv.opts,opts)
     nv.getPalette().then(swatches => {
       const RMSwatches:RMSwatch[] = []
-      for(let swatchKey in swatches) {
-        for(let alias of aliases) {
-          if(alias[1] == swatchKey) {
-            RMSwatches.push([alias,swatches[swatchKey]!.getRgb()])
+      for (let swatchKey in swatches) {
+        for (let alias of aliases) {
+          if (alias[1] == swatchKey) {
+            RMSwatches.push([alias, swatches[swatchKey]!.getRgb()])
             break;
           }
         }
@@ -31,4 +31,5 @@ const getFromNodeVibrant = function(buffer:Buffer,opts:any) : Promise<RMSwatch[]
     })
   })
 }
-export {getFromNodeVibrant}
+
+export { getFromNodeVibrant }
